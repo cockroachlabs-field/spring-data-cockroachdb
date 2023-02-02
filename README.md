@@ -145,7 +145,7 @@ Add this dependency to your `pom.xml` file:
 ```xml
 <dependency>
     <groupId>io.cockroachdb</groupId>
-    <artifactId>spring-data-cockroachdb-parent</artifactId>
+    <artifactId>spring-data-cockroachdb</artifactId>
     <version>{version}</version>
 </dependency>
 ```
@@ -210,17 +210,8 @@ sudo apt-get -qq install -y openjdk-8-jdk
 
 ### Dependencies
    
-This project depends on the [CockroachDB JDBC driver](https://github.com/cockroachlabs-field/cockroachdb-jdbc), which is not in any public
-Maven repository currently. Until then, you can clone and install it locally prior to building 
-this project.
-
-```xml
-<dependency>
-    <groupId>io.cockroachdb.jdbc</groupId>
-    <artifactId>cockroachdb-jdbc-driver</artifactId>
-    <version>{version}</version>
-</dependency>
-```
+This project depends on the [CockroachDB JDBC driver](https://github.com/cockroachlabs-field/cockroachdb-jdbc)
+which artifacts are available in [GitHub Packages](https://github.com/orgs/cockroachlabs-field/packages?repo_name=cockroachdb-jdbc).
 
 ### Clone the project
 
@@ -248,7 +239,7 @@ The distribution tar.gz is now found in `spring-data-cockroachdb-distribution/ta
            
 ## Examples
 
-TBD
+See spring-data-cockroachdb-examples.
 
 ## Run Integration Tests
 
@@ -266,7 +257,7 @@ cockroach sql --insecure --host=localhost -e "CREATE database spring_data"
 Then activate the integration test Maven profile:
 
 ```bash
-./mvnw -P it,test-coverage clean install
+./mvnw -P it clean install
 ```
 
 See the [pom.xml](pom.xml) file for changing the database URL and other settings (under `ìt` profile).
