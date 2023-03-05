@@ -7,6 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.springframework.core.annotation.AliasFor;
 import org.springframework.data.cockroachdb.aspect.TimeTravelMode;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +38,7 @@ public @interface TransactionBoundary {
     /**
      * Sets the 'transaction_read_only' session variable.
      */
+    @AliasFor(annotation = Transactional.class, attribute = "readOnly")
     boolean readOnly() default false;
 
     /**

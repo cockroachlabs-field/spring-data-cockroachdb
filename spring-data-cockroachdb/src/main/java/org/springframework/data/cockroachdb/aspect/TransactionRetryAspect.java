@@ -131,7 +131,7 @@ public class TransactionRetryAspect {
 
     protected void handleRecovery(List<SQLException> sqlExceptions, int numCalls, String methodName,
                                   Duration elapsedTime) {
-        String message = "Serialization error recovered after "
+        String message = "Recovered from transient SQL error after "
                 + numCalls + " calls to '"
                 + methodName + "' time spent: ("
                 + elapsedTime.toString() + ")";
@@ -145,8 +145,8 @@ public class TransactionRetryAspect {
         try {
             long backoffMillis = Math.min((long) (Math.pow(2, numCalls) + Math.random() * 1000), maxBackoff);
             if (numCalls <= 1 && logger.isWarnEnabled()) {
-                logger.warn("Serialization error in call {} to '{}' (backoff for {} ms before retry): {}",
-                        numCalls, methodName, backoffMillis, sqlException.getMessage());
+                logger.warn("Transient SQL error ({}) in call #{} to '{}' (backoff for {} ms before retry): {}",
+                        sqlException.getSQLState(), numCalls, methodName, backoffMillis, sqlException.getMessage());
             }
             Thread.sleep(backoffMillis);
         } catch (InterruptedException e) {
@@ -155,11 +155,10 @@ public class TransactionRetryAspect {
     }
 
     protected void handleNonTransientException(SQLException sqlException) {
-        // SQL exceptions are nested
         sqlException.forEach(ex -> {
-            SQLException sqlEx = (SQLException) ex;
-            logger.warn("Non-transient SQL error state: {} code: {} message: {}", sqlEx.getSQLState(),
-                    sqlEx.getErrorCode(), sqlEx.getMessage());
+            SQLException nested = (SQLException) ex;
+            logger.warn("Non-transient SQL error ({}): {}",
+                    nested.getSQLState(), nested.getMessage());
         });
     }
 }
