@@ -1,20 +1,19 @@
 package org.springframework.data.cockroachdb.it.bank.model;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-import javax.persistence.*;
-
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.springframework.data.cockroachdb.it.bank.service.NegativeBalanceException;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+import org.springframework.data.cockroachdb.it.bank.service.NegativeBalanceException;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
+import jakarta.persistence.*;
 
 /**
  * Represents a monetary account like asset, liability, expense, capital accounts and so forth.
@@ -25,7 +24,6 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 @Table(name = "account")
 @DynamicInsert
 @DynamicUpdate
-@TypeDef(name = "jsonb", typeClass = ForeignSystemJsonType.class, defaultForType = ForeignSystem.class)
 public class Account extends AbstractEntity<Long> {
     @Id
     @Column(updatable = false, nullable = false)
@@ -71,9 +69,9 @@ public class Account extends AbstractEntity<Long> {
     @Column(name = "allow_negative", nullable = false)
     private int allowNegative;
 
-    @Type(type = "jsonb")
     @Column(name = "metadata")
     @Basic(fetch = FetchType.LAZY)
+    @JdbcTypeCode(SqlTypes.JSON)
     private ForeignSystem foreignSystem;
 
     protected Account() {

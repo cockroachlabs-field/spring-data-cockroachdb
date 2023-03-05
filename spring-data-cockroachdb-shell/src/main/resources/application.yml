@@ -1,12 +1,14 @@
 spring:
   profiles:
     active: default
+  application:
+    name: Spring Data CockroachDB Shell
   output:
     ansi:
       enabled: always
   shell:
     history:
-      name: "shell.history"
+      name: shell.history
     command:
       stacktrace:
         enabled: true

@@ -2,12 +2,12 @@ package org.springframework.data.cockroachdb.basics;
 
 import java.util.Properties;
 
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.hibernate.cache.internal.NoCachingRegionFactory;
 import org.hibernate.cfg.Environment;
-import org.hibernate.dialect.CockroachDB201Dialect;
+import org.hibernate.dialect.CockroachDialect;
 import org.postgresql.PGProperty;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -118,7 +118,7 @@ public class JpaBasicsConfiguration {
 
     private JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setDatabasePlatform(CockroachDB201Dialect.class.getName());
+        vendorAdapter.setDatabasePlatform(CockroachDialect.class.getName());
         vendorAdapter.setDatabase(Database.POSTGRESQL);
         return vendorAdapter;
     }

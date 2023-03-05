@@ -12,7 +12,7 @@
     <artifactId>spring-data-cockroachdb-shell</artifactId>
     <packaging>jar</packaging>
 
-    <name>Spring Data CockroachDB Shell Client</name>
+    <name>Spring Data CockroachDB Shell</name>
 
     <dependencies>
         <dependency>
@@ -27,11 +27,16 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.5</version>
         </dependency>
 
         <dependency>
@@ -45,8 +50,8 @@
     </dependencies>
 
     <build>
-        <!-- Shortens the name -->
         <finalName>${project.artifactId}</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -62,6 +67,24 @@
                 <configuration>
                     <executable>true</executable>
                     <mainClass>org.springframework.data.cockroachdb.shell.ShellApplication</mainClass>
+                    <layers>
+                        <enabled>true</enabled>
+                    </layers>
+                    <image>
+                        <name>docker.io/library/${project.artifactId}</name>
+                    </image>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Title>${project.name}</Implementation-Title>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

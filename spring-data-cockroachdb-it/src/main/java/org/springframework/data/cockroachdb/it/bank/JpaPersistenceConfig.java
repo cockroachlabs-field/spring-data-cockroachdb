@@ -2,12 +2,11 @@ package org.springframework.data.cockroachdb.it.bank;
 
 import java.util.Properties;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.hibernate.cache.internal.NoCachingRegionFactory;
 import org.hibernate.cfg.Environment;
-import org.hibernate.dialect.CockroachDB201Dialect;
+import org.hibernate.dialect.CockroachDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +21,8 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
 @Profile(TestProfiles.JPA)
@@ -66,7 +67,7 @@ public class JpaPersistenceConfig {
 
     private JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setDatabasePlatform(CockroachDB201Dialect.class.getName());
+        vendorAdapter.setDatabasePlatform(CockroachDialect.class.getName());
         vendorAdapter.setDatabase(Database.POSTGRESQL);
         return vendorAdapter;
     }

@@ -12,9 +12,9 @@ import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Tuple;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Tuple;
 
 import org.springframework.data.cockroachdb.annotations.TransactionBoundary;
 import org.springframework.data.cockroachdb.it.TestProfiles;
