@@ -25,7 +25,7 @@ See [MIT](LICENSE.txt) license for terms and conditions.
 
 ## Features
 
-* Bundles [CockroachDB JDBC driver](https://github.com/cockroachlabs-field/cockroachdb-jdbc)
+* Bundles the [CockroachDB JDBC driver](https://github.com/cockroachlabs-field/cockroachdb-jdbc)
 * Meta-annotations for declaring:
   * Retryable transactions
   * Read-only transactions 
@@ -150,6 +150,52 @@ Add this dependency to your `pom.xml` file:
 </dependency>
 ```
 
+Then add the Maven repositories to your `pom.xml` file (alternatively in Maven's [settings.xml](https://maven.apache.org/settings.html)):
+
+```xml
+<repositories>
+    <repository>
+        <id>cockroachdb-jdbc</id>
+        <name>Cockroach Labs Maven Packages</name>
+        <url>https://maven.pkg.github.com/cockroachlabs-field/cockroachdb-jdbc</url>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+    <repository>
+        <id>spring-data-cockroachdb</id>
+        <name>Cockroach Labs Maven Packages</name>
+        <url>https://maven.pkg.github.com/cockroachlabs-field/spring-data-cockroachdb</url>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+```
+
+Finally, you need to authenticate to GitHub Packages by creating a personal access token (classic)
+that includes the `read:packages` scope. For more information, see [Authenticating to GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages).
+
+Add your personal access token to the servers section in your [settings.xml](https://maven.apache.org/settings.html):
+
+```xml
+<server>
+    <id>github</id>
+    <username>your-github-name</username>
+    <password>your-access-token</password>
+</server>
+```
+Take note that the server and repository id's must match (it can be different than `github`).
+
+Now you should be able to build your own project with the JDBC driver as a dependency:
+
+```shell
+mvn clean install
+```
+
+Alternatively, you can just clone the repository and build it locally using `mvn install`. See
+the building section at the end of this page.
+
 ## Getting Help
 
 ### Reporting Issues
@@ -195,17 +241,26 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 ## Building from Source
 
-Spring Data CockroachDB runs on any platform for which there is a JRE (8+).
+Spring Data CockroachDB requires Java 17 (or later) LTS. 
 
 ### Prerequisites
 
-- JDK8+ with 1.8 language level (OpenJDK compatible)
+- JDK17+ LTS for building (OpenJDK compatible)
 - Maven 3+ (optional, embedded)
+
+If you want to build with the regular `mvn` command,
+you will need [Maven v3.x](https://maven.apache.org/run-maven/index.html) or above.
 
 Install the JDK (Linux):
 
 ```bash
-sudo apt-get -qq install -y openjdk-8-jdk
+sudo apt-get -qq install -y openjdk-17-jdk
+```
+
+Install the JDK (macOS):
+
+```bash
+brew install openjdk@17 
 ```
 
 ### Dependencies
@@ -251,7 +306,7 @@ First start a [local](https://www.cockroachlabs.com/docs/stable/start-a-local-cl
 Create the database:
 
 ```bash
-cockroach sql --insecure --host=localhost -e "CREATE database spring_data"
+cockroach sql --insecure --host=localhost -e "CREATE database spring_data_test"
 ```
 
 Then activate the integration test Maven profile:

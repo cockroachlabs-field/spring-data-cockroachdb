@@ -26,44 +26,22 @@ import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 public class Connect extends CockroachShellCommand {
     @ShellMethodAvailability("notConnectedCheck")
     @ShellMethod(value = "Connect to CockroachDB", key = {"connect", "co"})
-    public void connect(@ShellOption(value = {
-            "--host", "-h"}, help = "hostname", defaultValue = "localhost") String host, @ShellOption(value = {
-            "--port", "-p"}, help = "listen port", defaultValue = "26257") String port, @ShellOption(value = {
-            "--database", "-d"}, help = "database name", defaultValue = "defaultdb") String database,
-                        @ShellOption(value = {
-                                "--username",
-                                "-u"}, help = "username used to connect to database", defaultValue = "root")
-                        String username,
-                        @ShellOption(help = "password used to connect to database", defaultValue = ShellOption.NULL)
-                        String password,
-                        @ShellOption(help = "SSL mode for database connection (disable, allow, prefer, require, verify-ca, verify-full)", defaultValue = "disable")
-                        String sslMode,
-                        @ShellOption(help = "path to Root Cert file when SSL is enabled", defaultValue = ShellOption.NULL)
-                        String sslRootCrtPath,
-                        @ShellOption(help = "path to SSL Client Cert file when SSL is enabled", defaultValue = ShellOption.NULL)
-                        String sslClientCrtPath,
-                        @ShellOption(help = "path to SSL Client Key file when SSL is enabled", defaultValue = ShellOption.NULL)
-                        String sslClientKeyPath,
-                        @ShellOption(value = {
-                                "--sql-trace",
-                                "-e"}, help = "enable method and SQL tracing", defaultValue = "false") boolean traceSQL,
-                        @ShellOption(value = {
-                                "--trace",
-                                "-t"}, help = "enable JDBC API method tracing", defaultValue = "false")
-                        boolean traceMethods,
-                        @ShellOption(value = {
-                                "--internal-retry",
-                                "-y"}, defaultValue = "false", help = "Enable driver-level retries")
-                        boolean internalRetry,
-                        @ShellOption(value = {
-                                "--implicit-sfu",
-                                "-u"}, defaultValue = "false", help = "Enable implicit SELECT FOR UPDATE rewrite")
-                        boolean implicitSFU,
-                        @ShellOption(value = {
-                                "--pool-size"}, defaultValue = "0", help = "If non-zero, use a pooled data source with given max/min size. Otherwise a non-pooled data source")
-                        int poolSize,
-                        @ShellOption(value = {
-                                "--dev"}, defaultValue = "false", help = "Internal") boolean devHost) {
+    public void connect(
+            @ShellOption(value = {"--host", "-t"}, help = "hostname", defaultValue = "localhost") String host,
+            @ShellOption(value = {"--port", "-p"}, help = "listen port", defaultValue = "26257") String port,
+            @ShellOption(value = {"--database", "-d"}, help = "database name", defaultValue = "defaultdb") String database,
+            @ShellOption(value = {"--username","-u"}, help = "username used to connect to database", defaultValue = "root") String username,
+            @ShellOption(help = "password used to connect to database", defaultValue = ShellOption.NULL) String password,
+            @ShellOption(help = "SSL mode for database connection (disable, allow, prefer, require, verify-ca, verify-full)", defaultValue = "disable") String sslMode,
+            @ShellOption(help = "path to Root Cert file when SSL is enabled", defaultValue = ShellOption.NULL) String sslRootCrtPath,
+            @ShellOption(help = "path to SSL Client Cert file when SSL is enabled", defaultValue = ShellOption.NULL) String sslClientCrtPath,
+            @ShellOption(help = "path to SSL Client Key file when SSL is enabled", defaultValue = ShellOption.NULL) String sslClientKeyPath,
+            @ShellOption(value = {"--sql-trace", "-e"}, help = "enable method and SQL tracing", defaultValue = "false") boolean traceSQL,
+            @ShellOption(value = {"--trace","-t"}, help = "enable JDBC API method tracing", defaultValue = "false") boolean traceMethods,
+            @ShellOption(value = {"--internal-retry","-y"}, defaultValue = "false", help = "Enable driver-level retries") boolean internalRetry,
+            @ShellOption(value = {"--implicit-sfu","-u"}, defaultValue = "false", help = "Enable implicit SELECT FOR UPDATE rewrite") boolean implicitSFU,
+            @ShellOption(value = {"--pool-size"}, defaultValue = "0", help = "If non-zero, use a pooled data source with given max/min size. Otherwise a non-pooled data source") int poolSize,
+            @ShellOption(value = {"--dev"}, defaultValue = "false", help = "Internal") boolean devHost) {
         if (devHost) {
             host = "192.168.1.99";
         }

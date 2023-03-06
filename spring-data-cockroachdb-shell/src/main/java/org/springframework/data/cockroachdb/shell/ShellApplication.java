@@ -10,10 +10,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.cockroachdb.shell.support.HybridShellRunner;
 import org.springframework.shell.boot.ApplicationRunnerAutoConfiguration;
 import org.springframework.shell.jline.InteractiveShellRunner;
-
-import org.springframework.data.cockroachdb.shell.support.HybridShellRunner;
 
 @EnableAutoConfiguration(exclude = {
         DataSourceAutoConfiguration.class,

@@ -1,8 +1,8 @@
 spring:
   profiles:
-    active: 
+    active:
   datasource:
-    url: "jdbc:cockroachdb://localhost:26257/spring_data?sslmode=disable"
+    url: "jdbc:cockroachdb://localhost:26257/spring_data_test?sslmode=disable"
     driver-class-name: io.cockroachdb.jdbc.CockroachDriver
     username: root
     hikari:

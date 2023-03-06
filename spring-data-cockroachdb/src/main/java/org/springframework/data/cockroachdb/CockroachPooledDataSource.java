@@ -18,7 +18,7 @@ import net.ttddyy.dsproxy.listener.logging.SLF4JLogLevel;
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 
 public abstract class CockroachPooledDataSource {
-    public static final String SQL_TRACE_LOGGER_NAME = "SQL_TRACE";
+    public static final String SQL_TRACE_LOGGER_NAME = "io.cockroachdb.jdbc.SQL_TRACE";
 
     public static Builder builder() {
         return new Builder();

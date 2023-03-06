@@ -120,11 +120,11 @@ public class JpaBasicsTest {
         Assertions.assertFalse(TransactionSynchronizationManager.isActualTransactionActive(),
                 "No transaction expected!");
 
-        Assertions.assertEquals(BigDecimal.TEN.setScale(2), accountService.getBalanceSnapshot_Implicit(accountId));
-        Assertions.assertEquals(BigDecimal.TEN.setScale(2), accountService.getBalanceSnapshot_Explicit(accountId));
+        Assertions.assertNull(accountService.getBalanceSnapshot_Implicit(accountId));
+        Assertions.assertNull(accountService.getBalanceSnapshot_Explicit(accountId));
 
-        LocalDateTime ts = new JdbcTemplate(dataSource).queryForObject("select now()-follower_read_timestamp()",
-                LocalDateTime.class);
+        LocalDateTime ts = new JdbcTemplate(dataSource).queryForObject(
+                "select now()-follower_read_timestamp()", LocalDateTime.class);
         long millis = ts.toInstant(ZoneOffset.UTC).toEpochMilli();
 
         logger.info("Waiting {} ms for closed timestamp", millis);

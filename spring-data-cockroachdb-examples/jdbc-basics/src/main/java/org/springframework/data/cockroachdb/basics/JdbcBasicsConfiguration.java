@@ -41,7 +41,7 @@ public class JdbcBasicsConfiguration extends AbstractJdbcConfiguration {
     }
 
     @Bean
-    public TransactionAttributesAspect transactionBoundaryAspect(JdbcTemplate jdbcTemplate) {
+    public TransactionAttributesAspect transactionAttributesAspect(JdbcTemplate jdbcTemplate) {
         return new TransactionAttributesAspect(jdbcTemplate);
     }
 
@@ -67,7 +67,7 @@ public class JdbcBasicsConfiguration extends AbstractJdbcConfiguration {
                 .create(ds)
                 .name("SQL-Trace")
                 .asJson()
-                .logQueryBySlf4j(SLF4JLogLevel.TRACE, "SQL_TRACE").build();
+                .logQueryBySlf4j(SLF4JLogLevel.TRACE, "io.cockroachdb.jdbc.SQL_TRACE").build();
     }
 
     @Bean

@@ -23,7 +23,7 @@ import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 
 @Configuration
 public class DataSourceConfig {
-    public static final String SQL_TRACE_LOGGER = "SQL_TRACE";
+    public static final String SQL_TRACE_LOGGER = "io.cockroachdb.jdbc.SQL_TRACE";
 
     @Autowired
     private Environment environment;

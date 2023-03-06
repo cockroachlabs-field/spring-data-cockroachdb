@@ -41,7 +41,7 @@ public class TransactionServiceImpl implements TransactionService {
             @SetVariable(variable = Variable.idle_in_transaction_session_timeout, value = "0"),
             @SetVariable(variable = Variable.enable_implicit_select_for_update, value = "on"),
     })
-    @Retryable
+    @Retryable(retryAttempts = 50)
     public Transaction submitTransferRequest(TransferRequest request) {
         if (!TransactionSynchronizationManager.isActualTransactionActive()) {
             throw new IllegalStateException("No transaction context - check Spring profile settings");
