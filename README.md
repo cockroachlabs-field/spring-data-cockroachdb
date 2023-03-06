@@ -150,27 +150,17 @@ Add this dependency to your `pom.xml` file:
 </dependency>
 ```
 
-Then add the Maven repositories to your `pom.xml` file (alternatively in Maven's [settings.xml](https://maven.apache.org/settings.html)):
+Then add the Maven repository to your `pom.xml` file (alternatively in Maven's [settings.xml](https://maven.apache.org/settings.html)):
 
 ```xml
-<repositories>
-    <repository>
-        <id>cockroachdb-jdbc</id>
-        <name>Cockroach Labs Maven Packages</name>
-        <url>https://maven.pkg.github.com/cockroachlabs-field/cockroachdb-jdbc</url>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
-    <repository>
-        <id>spring-data-cockroachdb</id>
-        <name>Cockroach Labs Maven Packages</name>
-        <url>https://maven.pkg.github.com/cockroachlabs-field/spring-data-cockroachdb</url>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
-</repositories>
+<repository>
+    <id>cockroachdb-jdbc</id>
+    <name>Cockroach Labs Maven Packages</name>
+    <url>https://maven.pkg.github.com/cockroachlabs-field/cockroachdb-jdbc</url>
+    <snapshots>
+        <enabled>true</enabled>
+    </snapshots>
+</repository>
 ```
 
 Finally, you need to authenticate to GitHub Packages by creating a personal access token (classic)
