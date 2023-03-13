@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.springframework.data.build</groupId>
         <artifactId>spring-data-parent</artifactId>
-        <version>3.0.2</version>
+        <version>3.0.3</version>
     </parent>
 
     <groupId>io.cockroachdb</groupId>
     <artifactId>spring-data-cockroachdb-parent</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Spring Data CockroachDB Parent</name>
@@ -72,17 +72,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <spring.boot.version>3.0.2</spring.boot.version>
-        <spring.data.version>3.0.2</spring.data.version>
-        <spring.shell.version>3.0.0</spring.shell.version>
+        <spring.boot.version>3.0.4</spring.boot.version>
+        <spring.data.version>3.0.3</spring.data.version>
+        <spring.shell.version>3.0.1</spring.shell.version>
 
+        <cockroachdb-jdbc.version>1.0.0</cockroachdb-jdbc.version>
         <datasource-proxy.version>1.8.1</datasource-proxy.version>
         <hikari.version>5.0.1</hikari.version>
         <slf4j.version>1.7.36</slf4j.version>
         <logback.version>1.4.5</logback.version>
         <mockito.version>4.8.1</mockito.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
-        <cockroachdb-jdbc.version>0.9.4-SNAPSHOT</cockroachdb-jdbc.version>
     </properties>
 
     <distributionManagement>
